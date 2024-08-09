@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react"
+import { ScrollView, View, StatusBar, Button } from "react-native"
+import { setStringAsync } from "expo-clipboard"
+import Promocao from "./src/components/Promocao"
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  async function CopiarTexto() {
+    await setStringAsync("Olá mundo!")
+  }
+
+  return <ScrollView>
+    <StatusBar
+      barStyle="dark-content"
+      backgroundColor="#fff" />
+    <View>
+      <Button
+        title="Clique aqui para copiar!"
+        onPress={CopiarTexto} />
+
+      <Promocao
+        titulo="Promoção Bermudas!"
+        imagem={require("./src/data/bermuda.webp")}
+        promocao={8}
+        codigo="BERMA05" />
+
+      <Promocao
+        titulo="Promoção para Camisas"
+        imagem={require("./src/data/camisa.jpg")}
+        promocao={5}
+        codigo="CAMISA07" />
+
+      <Promocao
+        titulo="DESCONTO Tenis!"
+        imagem={require("./src/data/tenis.jpg")}
+        promocao={10}
+        codigo="TENISSHOES" />
+    </View>
+  </ScrollView>
+}
